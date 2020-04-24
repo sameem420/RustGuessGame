@@ -3,8 +3,12 @@ Simple number guessing game made in Rust using the input module and random modul
 
 
 Instructions:-
+
 Open in Visual studio code
+
 use 'cargo run' to run the program
+
+
 PREVIEW:-
 
 ![](./images/1-rust_guessinggame.JPG)
