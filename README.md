@@ -9,7 +9,7 @@ Open in Visual studio code
 use 'cargo run' to run the program
 
 
-PREVIEW:-
+SCREENSHOTS:-
 
 ![](./images/1-rust_guessinggame.JPG)
 
