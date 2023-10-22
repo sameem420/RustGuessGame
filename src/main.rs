@@ -1,29 +1,37 @@
-use std::io;
-use rand::prelude::*;
+use std::{io, cmp::Ordering};
+use rand::Rng;
 
 fn main() {
-    println!("| Number Guessing Game |");
-    let secret_number = rand::thread_rng().gen_range(1, 10);
-    
+    println!("Guess the number between 1 and 100!");
+    let scnum = rand::thread_rng().gen_range(1, 101); // Secret number
+
     loop {
-        println!("Please input your guess.");
-        let mut number = String::new();
-        io::stdin().read_line(&mut number).expect("Error while reading line");
-        let number:u32 = match number.trim().parse() {
+        let mut guess = String::new(); // The user's guess
+    
+
+        println!("Please input your guess: ");
+
+        io::stdin().read_line(&mut guess).expect("Failed to read line");
+
+        // Convert the user's input to a number, and handle any errors
+        let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(err) => {
-                println!("The input must be a number... {:?} :", err);
-                continue
-            },
+            Err(_) => {
+                println!("Invalid input. Please enter a number.");
+                continue; // Continue to the next iteration of the loop
+            }
         };
 
-        if number == secret_number {
-            println!("Congratulations, You Win!");
-            break;
-        }
-        else
-        {
-            println!("Sorry, Try again!");
+        println!("Your guess is {}", guess);
+
+        match guess.cmp(&scnum) {
+            Ordering::Equal => {
+                println!("You win!");
+                break; // Exit the loop when the user correctly guesses the number
+            }
+            Ordering::Less => println!("Too low, try again"),
+            Ordering::Greater => println!("Too high, try again"),
         }
     }
 }
+
